@@ -1,205 +1,659 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SIDE TREE COFFEE</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SIDE TREE COFFEE</title>
+  <meta name="description" content="SIDE TREE COFFEE — กาแฟในสวน… ที่อยากให้คุณมานั่งช้า ๆ | เมนู เครื่องดื่ม เบเกอรี่ | นำทางมาร้าน & ทัก LINE OA" />
+  <style>
+    :root{
+      --green-950:#143025;
+      --green-900:#1b3a2d;
+      --green-800:#244334;
+      --green-700:#2f5a45;
+      --mint:#dfe9e2;
+      --cream:#f7f5f0;
+      --ink:#15221c;
+      --muted:#5a6a61;
+      --card:#ffffff;
+      --line:#e7eee9;
+      --shadow: 0 18px 45px rgba(0,0,0,.10);
+      --shadow-soft: 0 10px 25px rgba(0,0,0,.08);
+      --radius: 18px;
+      --radius-lg: 26px;
+      --max: 1120px;
+    }
 
-<style>
-  :root{
-    --green-900:#244334;
-    --green-700:#2f5a45;
-    --cream:#f7f5f0;
-    --text:#1f2f27;
-    --card:#ffffff;
-  }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+      color:var(--ink);
+      background: radial-gradient(1000px 600px at 70% -10%, #e9f2ec 0%, rgba(233,242,236,0) 60%),
+                  radial-gradient(900px 550px at -10% 30%, #eef3ee 0%, rgba(238,243,238,0) 60%),
+                  var(--cream);
+      line-height:1.6;
+    }
 
-  *{box-sizing:border-box}
-  body{
-    margin:0;
-    font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
-    background: var(--cream);
-    color: var(--text);
-    line-height:1.6;
-  }
+    /* ====== NAV ====== */
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:20;
+      backdrop-filter: blur(10px);
+      background: rgba(247,245,240,.80);
+      border-bottom: 1px solid rgba(0,0,0,.06);
+    }
+    .nav-inner{
+      max-width: var(--max);
+      margin:auto;
+      padding: 12px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .brand-mini{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      color:var(--ink);
+      font-weight:800;
+      letter-spacing:.4px;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:99px;
+      background: linear-gradient(135deg, #5aa67b, #2f5a45);
+      box-shadow: 0 6px 14px rgba(47,90,69,.35);
+    }
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav-links a{
+      color:var(--muted);
+      text-decoration:none;
+      font-weight:700;
+      font-size: 14px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      transition:.18s;
+    }
+    .nav-links a:hover{
+      background: rgba(36,67,52,.08);
+      color: var(--green-900);
+    }
+    .nav-cta{
+      display:flex; gap:10px; align-items:center;
+    }
 
-  /* HERO */
-  .hero{
-    position: relative;
-    min-height: 100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding: 80px 18px;
-    color: #fff;
-    overflow:hidden;
-  }
+    /* ====== BUTTONS ====== */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      text-decoration:none;
+      font-weight:800;
+      border: 1px solid rgba(0,0,0,.08);
+      transition:.18s;
+      white-space:nowrap;
+      cursor:pointer;
+    }
+    .btn.primary{
+      background: linear-gradient(135deg, #2f5a45, #1b3a2d);
+      color:#fff;
+      border-color: rgba(255,255,255,.12);
+      box-shadow: 0 12px 26px rgba(27,58,45,.22);
+    }
+    .btn.primary:hover{ transform: translateY(-1px); }
+    .btn.ghost{
+      background: rgba(255,255,255,.55);
+      color: var(--green-900);
+    }
+    .btn.ghost:hover{
+      background: rgba(255,255,255,.85);
+      transform: translateY(-1px);
+    }
 
-  .hero::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:
-      linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.35)),
-      url("assets/hero.jpg") center/cover no-repeat;
-  }
+    /* ====== LAYOUT ====== */
+    .wrap{ max-width: var(--max); margin:auto; padding: 0 16px; }
+    .section{ padding: 72px 0; }
+    .section-title{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom: 24px;
+    }
+    h2{
+      margin:0;
+      font-size: clamp(22px, 2.4vw, 30px);
+      letter-spacing:.2px;
+      color: var(--green-900);
+    }
+    .subtitle{
+      margin:0;
+      color: var(--muted);
+      font-weight:650;
+      max-width: 520px;
+      font-size: 14.5px;
+    }
 
-  .hero .inner{
-    position:relative;
-    max-width: 800px;
-  }
+    /* ====== HERO ====== */
+    .hero{
+      position:relative;
+      min-height: 86vh;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(900px 450px at 50% 18%, rgba(0,0,0,.35), rgba(0,0,0,.65)),
+        url("assets/hero.jpg") center/cover no-repeat;
+      transform: scale(1.02);
+      filter: saturate(1.05) contrast(1.05);
+    }
+    .hero::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(20,48,37,0) 0%, rgba(20,48,37,.55) 100%);
+      pointer-events:none;
+    }
+    .hero-inner{
+      position:relative;
+      max-width: 900px;
+      text-align:center;
+      padding: 78px 16px 40px;
+      color:#fff;
+    }
+    .kicker{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.18);
+      font-weight:800;
+      letter-spacing:.3px;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+    .kicker .leaf{
+      width:8px;height:8px;border-radius:99px;
+      background: #a8e3c0;
+      box-shadow: 0 0 0 6px rgba(168,227,192,.12);
+    }
+    .hero h1{
+      margin:0 0 10px;
+      font-size: clamp(34px, 5.2vw, 62px);
+      letter-spacing: .8px;
+      font-weight: 900;
+      text-shadow: 0 18px 40px rgba(0,0,0,.35);
+    }
+    .hero p{
+      margin:0 auto 22px;
+      max-width: 680px;
+      font-size: clamp(15px, 2vw, 18px);
+      opacity:.92;
+    }
+    .hero-cta{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top: 12px;
+    }
+    .hero-note{
+      margin-top: 18px;
+      font-size: 13px;
+      opacity: .86;
+    }
 
-  .brand{
-    font-weight: 800;
-    font-size: clamp(34px, 5vw, 56px);
-    margin-bottom: 10px;
-  }
+    /* ====== CARDS / GRID ====== */
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 920px){
+      .grid-3{ grid-template-columns: 1fr; }
+      .nav-links{ display:none; } /* มือถือให้เรียบ ๆ */
+    }
+    .card{
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      padding: 18px;
+    }
+    .card strong{ color: var(--green-900); }
+    .pill{
+      display:inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(36,67,52,.08);
+      color: var(--green-900);
+      font-weight:800;
+      font-size: 12.5px;
+      margin-bottom: 10px;
+    }
 
-  .tagline{
-    margin-bottom: 25px;
-    font-size: 18px;
-  }
+    /* ====== GALLERY PLACEHOLDER ====== */
+    .gallery{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 16px;
+    }
+    @media (max-width: 920px){ .gallery{ grid-template-columns: 1fr; } }
+    .ph{
+      height: 280px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, #e5efe9, #d8e5dd);
+      border: 1px dashed rgba(36,67,52,.28);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#3f6a54;
+      font-weight:900;
+      letter-spacing:.2px;
+      position:relative;
+      overflow:hidden;
+    }
+    .ph.small{ height: 132px; border-radius: var(--radius); }
+    .ph::after{
+      content:"";
+      position:absolute; inset:-30%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.65), rgba(255,255,255,0) 55%);
+      transform: rotate(10deg);
+      opacity:.8;
+    }
+    .ph span{ position:relative; z-index:1; }
 
-  .cta{
-    display:flex;
-    gap:12px;
-    justify-content:center;
-    flex-wrap:wrap;
-  }
+    /* ====== MENU ====== */
+    .menu-wrap{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 920px){ .menu-wrap{ grid-template-columns: 1fr; } }
 
-  .btn{
-    padding: 12px 20px;
-    border-radius: 999px;
-    text-decoration:none;
-    font-weight:700;
-    border: none;
-    cursor:pointer;
-    transition: 0.2s;
-  }
+    .menu-cat{
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      padding: 18px;
+    }
+    .menu-cat h3{
+      margin:0 0 10px;
+      color: var(--green-900);
+      letter-spacing:.2px;
+    }
+    .menu-item{
+      display:flex;
+      gap:12px;
+      padding: 12px 0;
+      border-top: 1px solid rgba(0,0,0,.06);
+      align-items:flex-start;
+    }
+    .menu-item:first-of-type{ border-top: 0; }
+    .thumb{
+      width: 54px; height: 54px;
+      border-radius: 14px;
+      background: linear-gradient(135deg,#e8f1eb,#d5e2da);
+      border: 1px dashed rgba(36,67,52,.28);
+      display:grid; place-items:center;
+      font-weight:900;
+      color:#4a7a61;
+      flex: 0 0 auto;
+    }
+    .mi{
+      flex:1;
+      min-width:0;
+    }
+    .mi-title{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:baseline;
+    }
+    .mi-title b{
+      font-size: 15.5px;
+      color: var(--ink);
+    }
+    .price{
+      font-weight:900;
+      color: var(--green-700);
+      white-space:nowrap;
+      font-size: 14.5px;
+    }
+    .desc{
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-weight: 650;
+      font-size: 13.5px;
+    }
 
-  .btn.primary{
-    background:white;
-    color:#244334;
-  }
+    /* ====== MAP / INFO STRIP ====== */
+    .info-strip{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){ .info-strip{ grid-template-columns: 1fr; } }
+    .info{
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      box-shadow: var(--shadow-soft);
+    }
+    .info ul{ margin:10px 0 0; padding-left: 18px; color: var(--muted); font-weight: 650; }
+    .info li{ margin: 6px 0; }
 
-  .btn.primary:hover{
-    background:#f0f0f0;
-  }
+    /* ====== FOOTER ====== */
+    .footer{
+      padding: 36px 0;
+      background: linear-gradient(180deg, rgba(20,48,37,0) 0%, rgba(20,48,37,.08) 100%);
+      border-top: 1px solid rgba(0,0,0,.06);
+      color: var(--muted);
+      font-weight:700;
+      font-size: 13px;
+    }
+    .footer .wrap{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .mini-links{
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .mini-links a{
+      color: var(--muted);
+      text-decoration:none;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.55);
+      border: 1px solid rgba(0,0,0,.06);
+    }
+    .mini-links a:hover{ color: var(--green-900); }
 
-  .btn.secondary{
-    background:rgba(255,255,255,0.2);
-    color:white;
-    border:1px solid rgba(255,255,255,0.5);
-  }
+    /* ====== FADE IN (เบา ๆ) ====== */
+    .fade{
+      opacity:0; transform: translateY(10px);
+      animation: fade .7s ease forwards;
+    }
+    .fade.d2{ animation-delay: .12s; }
+    .fade.d3{ animation-delay: .24s; }
+    @keyframes fade{ to{ opacity:1; transform: translateY(0); } }
 
-  .btn.secondary:hover{
-    background:rgba(255,255,255,0.3);
-  }
-
-  /* MENU */
-  .section{
-    max-width:1100px;
-    margin:auto;
-    padding:60px 20px;
-  }
-
-  .section h2{
-    text-align:center;
-    margin-bottom:30px;
-    color:var(--green-900);
-  }
-
-  .grid{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
-    gap:20px;
-  }
-
-  .card{
-    background:var(--card);
-    border-radius:16px;
-    padding:20px;
-    box-shadow:0 8px 20px rgba(0,0,0,0.08);
-  }
-
-  .ph{
-    height:120px;
-    background:linear-gradient(135deg,#e5efe9,#d8e5dd);
-    border-radius:12px;
-    margin-bottom:15px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:bold;
-    color:#6b8f71;
-  }
-
-  .price{
-    font-weight:bold;
-    margin-top:8px;
-    color:#2f5a45;
-  }
-
-  /* FOOTER */
-  .footer{
-    background:#244334;
-    color:white;
-    text-align:center;
-    padding:30px 20px;
-  }
-
-</style>
+    /* Accessibility */
+    a:focus{ outline: 3px solid rgba(90,166,123,.35); outline-offset: 2px; }
+  </style>
 </head>
 
 <body>
 
-<header class="hero">
-  <div class="inner">
-    <h1 class="brand">SIDE TREE COFFEE</h1>
-    <p class="tagline">กาแฟในสวน… ที่อยากให้คุณมานั่งช้า ๆ</p>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="nav-inner">
+      <a class="brand-mini" href="#top">
+        <span class="dot"></span>
+        <span>SIDE TREE COFFEE</span>
+      </a>
 
-    <div class="cta">
-      <a class="btn primary" href="https://share.google/u1PGEWgVQDjtQOIyw" target="_blank">📍 นำทางมาร้าน</a>
-      <a class="btn secondary" href="https://lin.ee/MlDJ1qE" target="_blank">💬 ทัก LINE</a>
-      <a class="btn secondary" href="#menu">☕ ดูเมนู</a>
+      <div class="nav-links">
+        <a href="#about">บรรยากาศ</a>
+        <a href="#gallery">รูปภาพ</a>
+        <a href="#menu">เมนู</a>
+        <a href="#visit">มาหน้าร้าน</a>
+      </div>
+
+      <div class="nav-cta">
+        <a class="btn ghost" href="https://share.google/u1PGEWgVQDjtQOIyw" target="_blank" rel="noopener">📍 นำทาง</a>
+        <a class="btn primary" href="https://lin.ee/MlDJ1qE" target="_blank" rel="noopener">💬 LINE OA</a>
+      </div>
     </div>
   </div>
-</header>
 
-<section class="section" id="menu">
-  <h2>เมนูประจำร้าน</h2>
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div class="kicker fade"><span class="leaf"></span> คาเฟ่สวนธรรมชาติ • นั่งช้า ๆ ได้จริง</div>
+      <h1 class="fade d2">SIDE TREE COFFEE</h1>
+      <p class="fade d3">กาแฟในสวน… ที่อยากให้คุณมานั่งช้า ๆ<br/>แวะพักใจใต้ร่มไม้ แล้วให้รสชาติดี ๆ ดูแลคุณ</p>
 
-  <div class="grid">
+      <div class="hero-cta fade d3">
+        <a class="btn primary" href="https://share.google/u1PGEWgVQDjtQOIyw" target="_blank" rel="noopener">📍 นำทางมาร้าน</a>
+        <a class="btn ghost" href="https://lin.ee/MlDJ1qE" target="_blank" rel="noopener">💬 ทัก LINE</a>
+        <a class="btn ghost" href="#menu">☕ ดูเมนู</a>
+      </div>
 
-    <div class="card">
-      <div class="ph">รูปเมนู</div>
-      <h3>อเมริกาโน่เย็น</h3>
-      <p>เข้มแต่ไม่ขมเกิน สดชื่นทุกวัน</p>
-      <div class="price">60 บาท</div>
+      <div class="hero-note fade d3">เปิดทุกวัน 08:00 – 17:30 น. • ติดร้าน จ.เจริญค้าวัสดุก่อสร้าง</div>
     </div>
+  </header>
 
-    <div class="card">
-      <div class="ph">รูปเมนู</div>
-      <h3>ลาเต้เย็น</h3>
-      <p>นมนุ่ม ละมุน กลิ่นกาแฟชัดกำลังดี</p>
-      <div class="price">70 บาท</div>
+  <!-- ABOUT / USP -->
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="section-title">
+        <div>
+          <h2>บรรยากาศที่ “อยากให้อยู่ต่อ” 🌿</h2>
+          <p class="subtitle">โทนธรรมชาติ ละมุน สบายตา เหมาะกับนั่งคุย ทำงาน หรือแวะพักระหว่างวัน</p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card fade">
+          <div class="pill">มุมถ่ายรูป</div>
+          <strong>ต้นไม้ + แสงธรรมชาติ</strong>
+          <p style="margin:8px 0 0;color:var(--muted);font-weight:650;">
+            มุมเขียว ๆ ถ่ายแล้วดูแพงแบบไม่ต้องพยายาม 😄
+          </p>
+        </div>
+
+        <div class="card fade d2">
+          <div class="pill">รสชาติ</div>
+          <strong>ละมุน ไม่หวานโดด</strong>
+          <p style="margin:8px 0 0;color:var(--muted);font-weight:650;">
+            ดื่มง่าย ไม่เลี่ยน เหมาะกับทุกวัน (และทุกคน)
+          </p>
+        </div>
+
+        <div class="card fade d3">
+          <div class="pill">เหมาะกับ</div>
+          <strong>แวะพักใจ & นัดเจอเพื่อน</strong>
+          <p style="margin:8px 0 0;color:var(--muted);font-weight:650;">
+            ที่นั่งสบาย บรรยากาศชิล ๆ ไม่เร่งรีบ
+          </p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-      <div class="ph">รูปเมนู</div>
-      <h3>โฟร์เบอร์รี่ฟรุ๊ตปั่น</h3>
-      <p>เปรี้ยวหวานสดใส ไม่หวานโดด</p>
-      <div class="price">85 บาท</div>
+  <!-- GALLERY -->
+  <section class="section" id="gallery">
+    <div class="wrap">
+      <div class="section-title">
+        <div>
+          <h2>รูปภาพร้าน & เมนู</h2>
+          <p class="subtitle">เว้นช่องไว้ให้เกียร์ใส่รูปทีหลัง (แนะนำ: ใช้รูปแนวนอนสวย ๆ 1 รูปใหญ่ + รูปย่อย 2 รูป)</p>
+        </div>
+      </div>
+
+      <div class="gallery">
+        <div class="ph"><span>ใส่รูปใหญ่ (บรรยากาศหน้าร้าน / สวน)</span></div>
+
+        <div style="display:grid;gap:16px;">
+          <div class="ph small"><span>ใส่รูปย่อย 1 (แก้วซิกเนเจอร์)</span></div>
+          <div class="ph small"><span>ใส่รูปย่อย 2 (มุมถ่ายรูป / เค้ก)</span></div>
+        </div>
+      </div>
     </div>
+  </section>
 
-  </div>
-</section>
+  <!-- MENU -->
+  <section class="section" id="menu">
+    <div class="wrap">
+      <div class="section-title">
+        <div>
+          <h2>เมนูแนะนำ ☕</h2>
+          <p class="subtitle">ตอนนี้ใส่ตัวอย่างให้ก่อน — เกียร์บอก “ชื่อเมนู/ราคา/คำบรรยายสั้น ๆ” เดี๋ยวผมจัดให้ครบทั้งร้าน</p>
+        </div>
+        <a class="btn ghost" href="https://lin.ee/MlDJ1qE" target="_blank" rel="noopener">ขอเมนูใน LINE</a>
+      </div>
 
-<footer class="footer">
-  <p>เปิดทุกวัน 08:00 – 17:30 น.</p>
-  <p>ติดร้าน จ.เจริญค้าวัสดุก่อสร้าง</p>
-</footer>
+      <div class="menu-wrap">
+        <div class="menu-cat">
+          <h3>กาแฟ (Coffee)</h3>
+
+          <div class="menu-item">
+            <div class="thumb">รูป</div>
+            <div class="mi">
+              <div class="mi-title"><b>อเมริกาโน่เย็น</b><span class="price">60 บาท</span></div>
+              <p class="desc">เข้มแต่ไม่ขมเกิน สดชื่นทุกวัน</p>
+            </div>
+          </div>
+
+          <div class="menu-item">
+            <div class="thumb">รูป</div>
+            <div class="mi">
+              <div class="mi-title"><b>ลาเต้เย็น</b><span class="price">70 บาท</span></div>
+              <p class="desc">นมนุ่มละมุน กลิ่นกาแฟชัดกำลังดี</p>
+            </div>
+          </div>
+
+          <div class="menu-item">
+            <div class="thumb">รูป</div>
+            <div class="mi">
+              <div class="mi-title"><b>คาปูชิโน่เย็น</b><span class="price">70 บาท</span></div>
+              <p class="desc">หอมฟองนุ่ม เบา ๆ ดื่มเพลิน</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-cat">
+          <h3>สดชื่น / ปั่น (Fresh & Blend)</h3>
+
+          <div class="menu-item">
+            <div class="thumb">รูป</div>
+            <div class="mi">
+              <div class="mi-title"><b>โฟร์เบอร์รี่ฟรุ๊ตปั่น</b><span class="price">85 บาท</span></div>
+              <p class="desc">เปรี้ยวหวานสดใส ไม่หวานโดด</p>
+            </div>
+          </div>
+
+          <div class="menu-item">
+            <div class="thumb">รูป</div>
+            <div class="mi">
+              <div class="mi-title"><b>ชาไทยปั่น</b><span class="price">75 บาท</span></div>
+              <p class="desc">หอมชา นุ่มละมุน ดื่มแล้วใจเย็น</p>
+            </div>
+          </div>
+
+          <div class="menu-item">
+            <div class="thumb">รูป</div>
+            <div class="mi">
+              <div class="mi-title"><b>น้ำผึ้งมะนาวโซดา</b><span class="price">65 บาท</span></div>
+              <p class="desc">ซ่า ๆ หอมมะนาว สดชื่นทันที</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px" class="card">
+        <strong>อยากให้เมนูดูพรีเมียมกว่านี้อีก?</strong>
+        <p style="margin:6px 0 0;color:var(--muted);font-weight:650;">
+          ส่ง “รายการเมนูทั้งหมด + ราคา” มาในแชท (พิมพ์เป็นบรรทัด ๆ ก็ได้) เดี๋ยวผมทำให้เป็นเมนูแบบหมวด + ใส่ป้าย Bestseller + เว้นช่องรูปให้ครบ ✨
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT / MAP -->
+  <section class="section" id="visit">
+    <div class="wrap">
+      <div class="section-title">
+        <div>
+          <h2>มาหน้าร้านง่าย ๆ 📍</h2>
+          <p class="subtitle">เน้นให้คน “มาหน้าร้าน” — ใส่ปุ่มนำทางใหญ่ ๆ ไว้ตรงนี้อีกจุด (กันหลงแบบสุภาพ)</p>
+        </div>
+      </div>
+
+      <div class="info-strip">
+        <div class="info">
+          <div class="pill">ข้อมูลร้าน</div>
+          <h3 style="margin:0 0 6px;color:var(--green-900);">SIDE TREE COFFEE</h3>
+          <p style="margin:0;color:var(--muted);font-weight:650;">
+            คาเฟ่สวนธรรมชาติ บรรยากาศชิล ๆ เหมาะกับนั่งพักใจ
+          </p>
+
+          <ul>
+            <li>เวลาเปิด: <b>08:00 – 17:30 น.</b></li>
+            <li>พิกัด: <b>ติดร้าน จ.เจริญค้าวัสดุก่อสร้าง</b></li>
+            <li>ติดต่อ: ทัก LINE OA ได้เลย</li>
+          </ul>
+
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn primary" href="https://share.google/u1PGEWgVQDjtQOIyw" target="_blank" rel="noopener">📍 เปิดแผนที่ Google</a>
+            <a class="btn ghost" href="https://lin.ee/MlDJ1qE" target="_blank" rel="noopener">💬 แชท LINE OA</a>
+          </div>
+        </div>
+
+        <div class="info">
+          <div class="pill">รีวิว (เว้นไว้)</div>
+          <p style="margin:0;color:var(--muted);font-weight:650;">
+            ใส่รีวิว/คำชมลูกค้าได้ตรงนี้ (พอมีรีวิวแล้ว หน้าเว็บจะ “น่าเชื่อถือขึ้นทันที”)
+          </p>
+
+          <div style="margin-top:12px; display:grid; gap:10px;">
+            <div class="card" style="background:rgba(255,255,255,.60)">
+              “เว้นข้อความรีวิว 1” ⭐⭐⭐⭐⭐
+            </div>
+            <div class="card" style="background:rgba(255,255,255,.60)">
+              “เว้นข้อความรีวิว 2” ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+
+          <p style="margin:12px 0 0;color:var(--muted);font-weight:650;font-size:13px;">
+            *ถ้ามีลิงก์ Google Review จริง เดี๋ยวผมใส่ปุ่ม “ดูรีวิวทั้งหมด” ให้ด้วย
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="wrap">
+      <div>© <span id="y"></span> SIDE TREE COFFEE • กาแฟในสวน… ที่อยากให้คุณมานั่งช้า ๆ</div>
+      <div class="mini-links">
+        <a href="#menu">ดูเมนู</a>
+        <a href="https://share.google/u1PGEWgVQDjtQOIyw" target="_blank" rel="noopener">นำทาง</a>
+        <a href="https://lin.ee/MlDJ1qE" target="_blank" rel="noopener">LINE OA</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ปีอัตโนมัติ
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 
 </body>
 </html>
