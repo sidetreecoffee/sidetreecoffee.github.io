@@ -1,102 +1,205 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>SIDE TREE COFFEE</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f7f5f0;
-    color: #2f4f3e;
-}
+  :root{
+    --green-900:#244334;
+    --green-700:#2f5a45;
+    --cream:#f7f5f0;
+    --text:#1f2f27;
+    --card:#ffffff;
+  }
 
-.hero {
-    height: 100vh;
-    background: #6b8f71;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
-}
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height:1.6;
+  }
 
-.hero h1 {
-    font-size: 48px;
-    margin: 0;
-}
+  /* HERO */
+  .hero{
+    position: relative;
+    min-height: 100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding: 80px 18px;
+    color: #fff;
+    overflow:hidden;
+  }
 
-.hero p {
-    font-size: 20px;
-    margin: 10px 0 20px;
-}
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.35)),
+      url("assets/hero.jpg") center/cover no-repeat;
+  }
 
-.button {
-    padding: 12px 25px;
-    background-color: white;
-    color: #2f4f3e;
-    text-decoration: none;
-    border-radius: 30px;
-    margin: 5px;
-    display: inline-block;
-    font-weight: bold;
-}
+  .hero .inner{
+    position:relative;
+    max-width: 800px;
+  }
 
-.section {
-    padding: 60px 20px;
-    max-width: 1000px;
-    margin: auto;
-    text-align: center;
-}
+  .brand{
+    font-weight: 800;
+    font-size: clamp(34px, 5vw, 56px);
+    margin-bottom: 10px;
+  }
 
-.menu-item {
-    margin: 25px 0;
-}
+  .tagline{
+    margin-bottom: 25px;
+    font-size: 18px;
+  }
 
-.footer {
-    background-color: #2f4f3e;
-    color: white;
-    padding: 30px;
-    text-align: center;
-}
+  .cta{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+
+  .btn{
+    padding: 12px 20px;
+    border-radius: 999px;
+    text-decoration:none;
+    font-weight:700;
+    border: none;
+    cursor:pointer;
+    transition: 0.2s;
+  }
+
+  .btn.primary{
+    background:white;
+    color:#244334;
+  }
+
+  .btn.primary:hover{
+    background:#f0f0f0;
+  }
+
+  .btn.secondary{
+    background:rgba(255,255,255,0.2);
+    color:white;
+    border:1px solid rgba(255,255,255,0.5);
+  }
+
+  .btn.secondary:hover{
+    background:rgba(255,255,255,0.3);
+  }
+
+  /* MENU */
+  .section{
+    max-width:1100px;
+    margin:auto;
+    padding:60px 20px;
+  }
+
+  .section h2{
+    text-align:center;
+    margin-bottom:30px;
+    color:var(--green-900);
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+    gap:20px;
+  }
+
+  .card{
+    background:var(--card);
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  }
+
+  .ph{
+    height:120px;
+    background:linear-gradient(135deg,#e5efe9,#d8e5dd);
+    border-radius:12px;
+    margin-bottom:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    color:#6b8f71;
+  }
+
+  .price{
+    font-weight:bold;
+    margin-top:8px;
+    color:#2f5a45;
+  }
+
+  /* FOOTER */
+  .footer{
+    background:#244334;
+    color:white;
+    text-align:center;
+    padding:30px 20px;
+  }
+
 </style>
 </head>
 
 <body>
 
-<div class="hero">
-    <h1>SIDE TREE COFFEE</h1>
-    <p>กาแฟในสวน… ที่อยากให้คุณมานั่งช้า ๆ</p>
-    <a class="button" href="#">📍 นำทางมาร้าน</a>
-    <a class="button" href="#">💬 ทัก LINE</a>
-</div>
+<header class="hero">
+  <div class="inner">
+    <h1 class="brand">SIDE TREE COFFEE</h1>
+    <p class="tagline">กาแฟในสวน… ที่อยากให้คุณมานั่งช้า ๆ</p>
 
-<div class="section">
-    <h2>เมนูประจำร้าน</h2>
+    <div class="cta">
+      <a class="btn primary" href="https://share.google/u1PGEWgVQDjtQOIyw" target="_blank">📍 นำทางมาร้าน</a>
+      <a class="btn secondary" href="https://lin.ee/MlDJ1qE" target="_blank">💬 ทัก LINE</a>
+      <a class="btn secondary" href="#menu">☕ ดูเมนู</a>
+    </div>
+  </div>
+</header>
 
-    <div class="menu-item">
-        <h3>อเมริกาโน่เย็น</h3>
-        <p>เข้มแต่ไม่ขมเกิน สดชื่นทุกวัน — 60 บาท</p>
+<section class="section" id="menu">
+  <h2>เมนูประจำร้าน</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="ph">รูปเมนู</div>
+      <h3>อเมริกาโน่เย็น</h3>
+      <p>เข้มแต่ไม่ขมเกิน สดชื่นทุกวัน</p>
+      <div class="price">60 บาท</div>
     </div>
 
-    <div class="menu-item">
-        <h3>ลาเต้เย็น</h3>
-        <p>นมนุ่ม ละมุน ดื่มง่าย — 70 บาท</p>
+    <div class="card">
+      <div class="ph">รูปเมนู</div>
+      <h3>ลาเต้เย็น</h3>
+      <p>นมนุ่ม ละมุน กลิ่นกาแฟชัดกำลังดี</p>
+      <div class="price">70 บาท</div>
     </div>
 
-    <div class="menu-item">
-        <h3>โฟร์เบอร์รี่ฟรุ๊ตปั่น</h3>
-        <p>เปรี้ยวหวานสดใส ไม่หวานโดด — 85 บาท</p>
+    <div class="card">
+      <div class="ph">รูปเมนู</div>
+      <h3>โฟร์เบอร์รี่ฟรุ๊ตปั่น</h3>
+      <p>เปรี้ยวหวานสดใส ไม่หวานโดด</p>
+      <div class="price">85 บาท</div>
     </div>
-</div>
 
-<div class="footer">
-    <p>เปิดทุกวัน 08:00 – 17:30 น.</p>
-    <p>ติดร้าน จ.เจริญค้าวัสดุก่อสร้าง</p>
-</div>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>เปิดทุกวัน 08:00 – 17:30 น.</p>
+  <p>ติดร้าน จ.เจริญค้าวัสดุก่อสร้าง</p>
+</footer>
 
 </body>
 </html>
